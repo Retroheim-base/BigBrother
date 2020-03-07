@@ -239,7 +239,6 @@ class Session{
 				if($nextState === 1){
 					$this->status = 1;
 				}elseif($nextState === 2){
-					$this->status = -1;
 					$this->manager->openSession($this);
 					$this->status = 2;
 				}else{
