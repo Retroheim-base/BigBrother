@@ -33,7 +33,8 @@ use phpseclib\Crypt\RSA;
 use phpseclib\Crypt\AES;
 
 use pocketmine\plugin\PluginBase;
-use pocketmine\network\mcpe\protocol\ProtocolInfo as Info;
+use pocketmine\network\mcpe\protocol\ProtocolInfo as Info;	 * @return string
+
 use pocketmine\network\mcpe\protocol\TextPacket;
 use pocketmine\block\Block;
 use pocketmine\block\Chest;
