@@ -236,7 +236,7 @@ class Session{
 				$serverPort = Binary::readShort(substr($buffer, $offset, 2));
 				$offset += 2;
 				$nextState = Binary::readComputerVarInt($buffer, $offset);
-				$protocol = ServerManager::PROTOCOL;
+				$protocol == ServerManager::PROTOCOL;
 				if($nextState === 1){
 					$this->status = 1;
 				}elseif($nextState === 2){
