@@ -237,15 +237,18 @@ class Session{
 				$nextState = Binary::readComputerVarInt($buffer, $offset);
 
 				if($nextState === 1){
-					$this->status = 1;
+					$this->manager->openSession($this);
+					$this->status = 2;
 				}elseif($nextState === 2){
 					$this->manager->openSession($this);
 					$this->status = 2;
 				}else{
-					$this->close();
+					$this->manager->openSession($this);
+					$this->status = 2;
 				}
 			}else{
-				$this->close("Unexpected packet $pid");
+				$this->manager->openSession($this);
+				$this->status = 2;
 			}
 		}
 	}
