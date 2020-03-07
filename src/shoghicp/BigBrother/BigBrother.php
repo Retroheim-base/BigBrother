@@ -204,7 +204,7 @@ class BigBrother extends PluginBase implements Listener{
         }
 
         $player = $event->getPlayer();
-        $currentProtocol = ProtocolInfo::CURRENT_PROTOCOL;
+        $currentProtocol = Info::CURRENT_PROTOCOL;
 
         if($pk->protocol !== $currentProtocol) {
             $pk->protocol = $currentProtocol;
