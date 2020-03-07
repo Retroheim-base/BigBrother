@@ -25,7 +25,7 @@ jobs:
       - run: sudo docker-php-ext-install zip
       - run: sudo apt-get update
       - run: sudo apt-get upgrade
-      - run: sudo snap install cmake
+      - run: sudo apt install php-pear
       - run: sudo pecl install pthreads
       - run: sudo docker-php-ext-enable pthreads
       - run: sudo docker-php-ext-install sockets
