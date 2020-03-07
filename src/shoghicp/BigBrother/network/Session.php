@@ -227,6 +227,7 @@ class Session{
 			}
 		}elseif($this->status === 0){
 			$pid = Binary::readComputerVarInt($buffer, $offset);
+			$pid === 0x00;
 			if($pid === 0x00){
 				$protocol = Binary::readComputerVarInt($buffer, $offset);
 				$len = Binary::readComputerVarInt($buffer, $offset);
@@ -235,12 +236,11 @@ class Session{
 				$serverPort = Binary::readShort(substr($buffer, $offset, 2));
 				$offset += 2;
 				$nextState = Binary::readComputerVarInt($buffer, $offset);
-				
+				$protocol === ServerManager::PROTOCOL;
 				if($nextState === 1){
 					$this->status = 1;
 				}elseif($nextState === 2){
 					$this->status = -1;
-					$protocol = 340;
 					if($protocol < ServerManager::PROTOCOL){
 						$packet = new LoginDisconnectPacket();
 						$packet->reason = json_encode(["translate" => "multiplayer.disconnect.outdated_client", "with" => [["text" => ServerManager::VERSION]]]);
