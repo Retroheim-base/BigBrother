@@ -228,7 +228,7 @@ class Session{
 		}elseif($this->status === 0){
 			$pid = Binary::readComputerVarInt($buffer, $offset);
 			if($pid === 0x00){
-				#$protocol = Binary::readComputerVarInt($buffer, $offset);
+				$protocol = Binary::readComputerVarInt($buffer, $offset);
 				$protocol = ServerManager::PROTOCOL;
 				$len = Binary::readComputerVarInt($buffer, $offset);
 				$hostname = substr($buffer, $offset, $len);
