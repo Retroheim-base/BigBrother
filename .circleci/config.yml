@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # Specify the version you desire here
-      - image: circleci/php:7.4.3-zts
+      - image: marcelobrake/php72cli-pthreads:latest
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -22,11 +22,8 @@ jobs:
       - checkout
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-      - run: sudo docker-php-ext-install zip
       - run: sudo apt-get update
       - run: sudo apt-get upgrade
-      - run: sudo docker-php-ext-enable pthreads
-      - run: sudo docker-php-ext-install sockets
       # Download and cache dependencies
       - restore_cache:
           keys:
