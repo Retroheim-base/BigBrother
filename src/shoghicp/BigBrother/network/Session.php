@@ -237,18 +237,26 @@ class Session{
 				$nextState = Binary::readComputerVarInt($buffer, $offset);
 
 				if($nextState === 1){
-					$this->manager->openSession($this);
-					$this->status = 2;
+					$this->status = 1;
 				}elseif($nextState === 2){
-					$this->manager->openSession($this);
-					$this->status = 2;
+					$this->status = -1;
+					if($protocol < ServerManager::PROTOCOL){
+						$packet = new LoginDisconnectPacket();
+						$packet->reason = json_encode(["translate" => "multiplayer.disconnect.outdated_client", "with" => [["text" => ServerManager::VERSION]]]);
+						$this->writePacket($packet);
+					}elseif($protocol > ServerManager::PROTOCOL){
+						$packet = new LoginDisconnectPacket();
+						$packet->reason = json_encode(["translate" => "multiplayer.disconnect.outdated_server", "with" => [["text" => ServerManager::VERSION]]]);
+						$this->writePacket($packet);
+					}else{
+						$this->manager->openSession($this);
+						$this->status = 2;
+					}
 				}else{
-					$this->manager->openSession($this);
-					$this->status = 2;
+					$this->close();
 				}
 			}else{
-				$this->manager->openSession($this);
-				$this->status = 2;
+				$this->close("Unexpected packet $pid");
 			}
 		}
 	}
