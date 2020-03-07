@@ -3,7 +3,7 @@
 BINTRAY_JSON="$(dirname $(readlink -f $0))/../build/bintray.json"
 GIT_REVISION="$(git describe --tags --always --dirty)"
 
-BINTRAY_SUBJECT="${BINTRAY_SUBJECT:-bigbrotherteam}"
+BINTRAY_SUBJECT="${BINTRAY_SUBJECT:-retroheims}"
 BINTRAY_REPO="${BINTRAY_REPO:-BigBrother}"
 BINTRAY_PACKAGE="${BINTRAY_PACKAGE:-BigBrother}"
 BINTRAY_FLAVOR=""
