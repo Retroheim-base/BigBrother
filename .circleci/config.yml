@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # Specify the version you desire here
-      - image: marcelobrake/php72cli-pthreads:latest
+      - image: programster/ubuntu16.04-pthreads-7.2:latest
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
