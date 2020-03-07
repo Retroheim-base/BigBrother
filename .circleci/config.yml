@@ -25,7 +25,7 @@ jobs:
       - run: sudo docker-php-ext-install zip
       - run: sudo apt-get update
       - run: sudo apt-get upgrade
-      - run: sudo apt -y install php7.4-zts php7.4-zts-common php7.4-zts-xml php7.4-zts-dev
+      - run: sudo apt -y install php7.4.3-zts php7.4.3-zts-common php7.4.3-zts-xml php7.4.3-zts-dev
       - run: sudo pecl install pthreads
       - run: sudo echo "extension=pthreads.so" >> /etc/php/7.4-zts/mods-available/pthreads.ini
       - run: sudo echo "extension=pthreads.so" >> /etc/php/7.4-zts/cli/conf.d/pthreads.ini
