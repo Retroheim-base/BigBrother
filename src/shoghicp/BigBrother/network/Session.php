@@ -236,7 +236,7 @@ class Session{
 				$offset += 2;
 				$nextState = Binary::readComputerVarInt($buffer, $offset);
 				const NEW_PROTOCOL = $protocol;
-				use const NEW_PROTOCOL as ServerManager::PROTOCOL
+				use const NEW_PROTOCOL as ServerManager::PROTOCOL;
 				
 				if($nextState === 1){
 					$this->status = 1;
