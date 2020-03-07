@@ -23,12 +23,9 @@ jobs:
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: sudo docker-php-ext-install zip
-      - run: sudo add-apt-repository ppa:ondrej/php-zts
       - run: sudo apt-get update
-      - run: sudo apt-get -y update
       - run: sudo apt-get upgrade
       - run: sudo apt -y install php7.4-zts php7.4-zts-common php7.4-zts-xml php7.4-zts-dev
-      - run: sudo apt install php-pear
       - run: sudo pecl install pthreads
       - run: sudo echo "extension=pthreads.so" >> /etc/php/7.4-zts/mods-available/pthreads.ini
       - run: sudo echo "extension=pthreads.so" >> /etc/php/7.4-zts/cli/conf.d/pthreads.ini
