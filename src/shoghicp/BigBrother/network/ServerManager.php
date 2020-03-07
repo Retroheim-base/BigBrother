@@ -34,8 +34,8 @@ use shoghicp\BigBrother\utils\Binary;
 
 class ServerManager{
 
-	const VERSION = "1.*.*";
-	const PROTOCOL = 340;
+	const VERSION = "any";
+	const PROTOCOL = *;
 
 	/*
 	 * Internal Packet:
