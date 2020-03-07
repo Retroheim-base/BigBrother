@@ -23,12 +23,12 @@ jobs:
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: sudo docker-php-ext-install zip
-      - run: sudo pecl install pthreads
-      - run: sudo apt-get update && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev libicu-dev libsqlite-dev libsqlite3-dev
+      - run: sudo apt-get update && sudo apt-get upgrade && sudo apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev libicu-dev libsqlite-dev libsqlite3-dev
       - run: sudo docker-php-ext-install intl iconv mcrypt pdo pdo_mysql pdo_sqlite mbstring tokenizer
       - run: sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ 
       - run: sudo docker-php-ext-install gd 
       - run: sudo docker-php-ext-install opcache 
+      - run: sudo pecl install pthreads
       - run: sudo docker-php-ext-enable pthreads
       - run: sudo docker-php-ext-install sockets
       # Download and cache dependencies
