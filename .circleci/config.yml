@@ -7,6 +7,7 @@ jobs:
   build:
     docker:
       # Specify the version you desire here
+      - image: circleci/php:7.4.3-zts-buster
       - image: giapt/dora-php:latest
 
       # Specify service dependencies here if necessary
@@ -20,8 +21,8 @@ jobs:
 
     steps:
       - checkout
-
-
+      - run: sudo apt-get update
+      - run: sudo apt-get upgrade
       # Download and cache dependencies
       - restore_cache:
           keys:
