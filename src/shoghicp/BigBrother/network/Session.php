@@ -240,7 +240,7 @@ class Session{
 					$this->status = 1;
 				}elseif($nextState === 2){
 					$this->status = -1;
-					$protocol = ServerManager::PROTOCOL;
+					$protocol = 340;
 					if($protocol < ServerManager::PROTOCOL){
 						$packet = new LoginDisconnectPacket();
 						$packet->reason = json_encode(["translate" => "multiplayer.disconnect.outdated_client", "with" => [["text" => ServerManager::VERSION]]]);
