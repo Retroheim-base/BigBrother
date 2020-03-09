@@ -53,8 +53,8 @@ class Session{
 	/** @var bool */
 	protected $encryptionEnabled = false;
 	
-	private $eProtocol = ServerManager::PROTOCOL;
-	private $eVersion = ServerManager::VERSION;
+	protected $eProtocol = ServerManager::PROTOCOL;
+	protected $eVersion = ServerManager::VERSION;
 
 	/** @var ?int */
 	private $threshold = null;
