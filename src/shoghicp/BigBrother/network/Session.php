@@ -53,8 +53,6 @@ class Session{
 	/** @var bool */
 	protected $encryptionEnabled = false;
 	
-	protected $eProtocol = ServerManager::PROTOCOL;
-	protected $eVersion = ServerManager::VERSION;
 
 	/** @var ?int */
 	private $threshold = null;
@@ -171,7 +169,8 @@ class Session{
 			$this->close("Invalid length");
 			return;
 		}
-
+	    $eProtocol = ServerManager::PROTOCOL;
+	    $eVersion = ServerManager::VERSION;
 		$offset = 0;
 
 		$buffer = $this->read($length);
