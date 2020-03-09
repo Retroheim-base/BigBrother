@@ -52,6 +52,9 @@ class Session{
 	protected $aes;
 	/** @var bool */
 	protected $encryptionEnabled = false;
+	
+	private $eProtocol = ServerManager::PROTOCOL;
+	private $eVersion = ServerManager::VERSION;
 
 	/** @var ?int */
 	private $threshold = null;
@@ -202,8 +205,8 @@ class Session{
 				}
 				$data = [
 					"version" => [
-						"name" => ServerManager::VERSION,
-						"protocol" => ServerManager::PROTOCOL
+						"name" => $eVersion,
+						"protocol" => $eProtocol
 					],
 					"players" => [
 						"max" => $this->manager->getServerData()["MaxPlayers"],
@@ -238,7 +241,10 @@ class Session{
 				$offset += 2;
 				$nextState = Binary::readComputerVarInt($buffer, $offset);
 				if ($protocol !== ServerManager::PROTOCOL)
+				{
+					$eProtocol = $protocol;
 					$protocol = ServerManager::PROTOCOL;
+				}
 				if($nextState === 1){
 					$this->status = 1;
 				}elseif($nextState === 2){
