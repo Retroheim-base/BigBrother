@@ -169,7 +169,7 @@ class Session{
 			$this->close("Invalid length");
 			return;
 		}
-	    $eProtocol = 404;#ServerManager::PROTOCOL;
+	    $eProtocol = 498;#ServerManager::PROTOCOL;
 	    $eVersion = "1.14.4";#ServerManager::VERSION;
 		$offset = 0;
 
