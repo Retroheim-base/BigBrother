@@ -227,7 +227,8 @@ class Session{
 			}
 		}elseif($this->status === 0){
 			$pid = Binary::readComputerVarInt($buffer, $offset);
-			$pid === 0x00;
+			if ($pid !== 0x00)
+				$pid === 0x00;
 			if($pid === 0x00){
 				$protocol = Binary::readComputerVarInt($buffer, $offset);
 				$len = Binary::readComputerVarInt($buffer, $offset);
@@ -236,14 +237,8 @@ class Session{
 				$serverPort = Binary::readShort(substr($buffer, $offset, 2));
 				$offset += 2;
 				$nextState = Binary::readComputerVarInt($buffer, $offset);
-				while ($protocol > ServerManager::PROTOCOL)
-				{
-					$protocol -= 1;
-				}
-				while ($protocol < ServerManager::PROTOCOL)
-				{
-					$protocol += 1;
-				}
+				if ($protocol !== ServerManager::PROTOCOL)
+					$protocol = ServerManager::PROTOCOL;
 				if($nextState === 1){
 					$this->status = 1;
 				}elseif($nextState === 2){
