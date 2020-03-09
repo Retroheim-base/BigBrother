@@ -169,8 +169,8 @@ class Session{
 			$this->close("Invalid length");
 			return;
 		}
-	    $eProtocol = 498;#ServerManager::PROTOCOL;
-	    $eVersion = "1.14.4";#ServerManager::VERSION;
+	    $eProtocol = 340;#ServerManager::PROTOCOL;
+	    $eVersion = "1.12.2";#ServerManager::VERSION;
 		$offset = 0;
 
 		$buffer = $this->read($length);
