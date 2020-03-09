@@ -33,7 +33,9 @@ use phpseclib\Crypt\RSA;
 use phpseclib\Crypt\AES;
 
 use pocketmine\plugin\PluginBase;
-use pocketmine\network\mcpe\protocol\ProtocolInfo as Info;
+use pocketmine\network\mcpe\protocol\ProtocolInfo as Info;	
+use pocketmine\event\server\DataPacketReceiveEvent;
+use pocketmine\network\mcpe\protocol\LoginPacket;
 use pocketmine\network\mcpe\protocol\TextPacket;
 use pocketmine\block\Block;
 use pocketmine\block\Chest;
@@ -84,6 +86,7 @@ class BigBrother extends PluginBase implements Listener{
 				$enable = false;
 			}
 		}
+		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 
 		if($enable){
 			if(Info::CURRENT_PROTOCOL === 389){
@@ -192,6 +195,22 @@ class BigBrother extends PluginBase implements Listener{
 			}
 		}
 	}
+	public function onLogin(DataPacketReceiveEvent $event) {
+
+        $pk = $event->getPacket();
+
+        if(!$pk instanceof LoginPacket) {
+            return;
+        }
+
+        $player = $event->getPlayer();
+        $currentProtocol = Info::CURRENT_PROTOCOL;
+
+        if($pk->protocol !== $currentProtocol) {
+            $pk->protocol = $currentProtocol;
+            $this->getLogger()->alert("§6{$player->getName()}'s protocol changed to {$currentProtocol}!");
+        }
+    }
 
 	/**
 	 * @return string ip address

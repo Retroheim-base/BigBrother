@@ -3,7 +3,7 @@
 BINTRAY_JSON="$(dirname $(readlink -f $0))/../build/bintray.json"
 GIT_REVISION="$(git describe --tags --always --dirty)"
 
-BINTRAY_SUBJECT="${BINTRAY_SUBJECT:-bigbrotherteam}"
+BINTRAY_SUBJECT="${BINTRAY_SUBJECT:-retroheim-base}"
 BINTRAY_REPO="${BINTRAY_REPO:-BigBrother}"
 BINTRAY_PACKAGE="${BINTRAY_PACKAGE:-BigBrother}"
 BINTRAY_FLAVOR=""
@@ -28,11 +28,9 @@ tee "${BINTRAY_JSON}" <<EOF
     "public_download_numbers": true,
     "public_stats": true
   },
-
   "version": {
     "name": "${GIT_REVISION}"
   },
-
   "files":
     [
       {"includePattern": "build/BigBrother.phar", "uploadPattern": "${TRAVIS_BRANCH}/BigBrother-${GIT_REVISION}.phar"}

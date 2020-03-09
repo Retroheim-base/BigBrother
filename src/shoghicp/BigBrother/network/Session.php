@@ -52,6 +52,7 @@ class Session{
 	protected $aes;
 	/** @var bool */
 	protected $encryptionEnabled = false;
+	
 
 	/** @var ?int */
 	private $threshold = null;
@@ -137,20 +138,7 @@ class Session{
 	 * @param Packet $packet
 	 */
 	public function writePacket(Packet $packet) : void{
-		$data = $packet->write();
-		if($this->threshold === null){
-			$this->write(Binary::writeComputerVarInt(strlen($data)) . $data);
-		}else{
-			$dataLength = strlen($data);
-			if($dataLength >= $this->threshold){
-				$data = zlib_encode($data, ZLIB_ENCODING_DEFLATE, 7);
-			}else{
-				$dataLength = 0;
-			}
-
-			$data = Binary::writeComputerVarInt($dataLength) . $data;
-			$this->write(Binary::writeComputerVarInt(strlen($data)) . $data);
-		}
+		$this->writeRaw($packet->write());
 	}
 
 	/**
@@ -181,7 +169,8 @@ class Session{
 			$this->close("Invalid length");
 			return;
 		}
-
+	    $eProtocol = 498;#ServerManager::PROTOCOL;
+	    $eVersion = "1.14.4";#ServerManager::VERSION;
 		$offset = 0;
 
 		$buffer = $this->read($length);
@@ -215,8 +204,8 @@ class Session{
 				}
 				$data = [
 					"version" => [
-						"name" => ServerManager::VERSION,
-						"protocol" => ServerManager::PROTOCOL
+						"name" => $eVersion,
+						"protocol" => $eProtocol
 					],
 					"players" => [
 						"max" => $this->manager->getServerData()["MaxPlayers"],
@@ -240,6 +229,8 @@ class Session{
 			}
 		}elseif($this->status === 0){
 			$pid = Binary::readComputerVarInt($buffer, $offset);
+			if ($pid !== 0x00)
+				$pid === 0x00;
 			if($pid === 0x00){
 				$protocol = Binary::readComputerVarInt($buffer, $offset);
 				$len = Binary::readComputerVarInt($buffer, $offset);
@@ -248,7 +239,11 @@ class Session{
 				$serverPort = Binary::readShort(substr($buffer, $offset, 2));
 				$offset += 2;
 				$nextState = Binary::readComputerVarInt($buffer, $offset);
-
+				if ($protocol !== ServerManager::PROTOCOL)
+				{
+					$eProtocol = $protocol;
+					$protocol = ServerManager::PROTOCOL;
+				}
 				if($nextState === 1){
 					$this->status = 1;
 				}elseif($nextState === 2){
