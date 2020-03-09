@@ -170,7 +170,7 @@ class Session{
 			return;
 		}
 	    $eProtocol = 404;#ServerManager::PROTOCOL;
-	    $eVersion = 1.14.4;#ServerManager::VERSION;
+	    $eVersion = "1.14.4";#ServerManager::VERSION;
 		$offset = 0;
 
 		$buffer = $this->read($length);
